@@ -1,2 +1,70 @@
-# CrowdPermission
-Finding over-privileged apps in app markets using permission-to-review analysis
+# 实验步骤
+## Review Selection
+1. 获取Android开发文档中关于permission和sensitive API的语义字典
+2. 扩充语义，利用WordNet
+3. 从Google Play的Reviews中挑选与app的permission有关的review
+
+## LDA Training
+1. 将筛选后的Review输入到BTM中进行聚类，输出topic，reviews
+
+## Statistics Results
+1. 检测异常的app权限请求
+
+# 文件信息
+## /code
+1. FindSensitiveAPi.py  
+功能：将映射permission的sensitive api输出，映射文件的位置/data/jellybean_allmappings.txt
+
+2. SemanticExpansion.py  
+    * 功能：扩充关于permission 语义信息的字典  
+    * 输入：/data/dictionary  
+    * 输出：python的字典 key:permission_name ,value: 单词列表
+
+3. ReviewSelection.py  
+    * 功能：从GooglePlay中找出与app的权限（功能）有关的review  
+    * 输入:
+  1. permission和sensitive API的semantic dictionary有SemanticExpansion.py产生
+  2. Google Play的用户评论 raw data  
+    * 输出:
+  1. 以json文件形式存放于review_data中
+
+4. statistic.py  
+  * 功能:
+    1. 统计step3中的app和review的相关属性信息
+    2. 处理step3中产生筛选后的文件，合并输出到BTM模型中训练  
+  * 输入：Step3中筛选出的review数据，位置/review_data
+  * 输出：
+    1. 产生可以输出到BTM模型中的文件格式，存放/merge_data/merge.txt
+    2. 产生review与app_id的映射文件，存放/merge_data/review_id.txt
+
+5. result.py  
+  * 功能：根据BTM训练输出的数据，统计每一个topic中app的详细信息
+  * 输入：BTM模型的文件，文件位置result_data/k20.pz_d
+  * 输出：
+    1. 文本文件：topic app的列表，存放位置 /result_data/topic_app.txt
+    2. python的字典文件：key：topic（数字型），value：app ID的列表
+
+6. OutlierDetection.py  
+  * 功能：Final Step，找出一个app处理后的permission信息
+  * 输入：
+    1. step5中的topic,App_id 列表字典数据
+  * 输出：
+    1. app_id，Real(permission)
+
+
+## /data
+1. api:permission 映射的API列表
+2. dictionary:permission 对应的语义word
+3. jellybean_allmappings:permission与sensitive API的映射
+4. permission_list.txt:权限列表信息
+
+## /merge_data：
+1. merge.txt:用户输出到BTM中的文件
+2. review_id.txt:用户评论与App_id的对应数据信息
+
+## /result_data:
+1. k20.pz_d:BTM输出的topic，review的概率数据
+2. topic_app.txt：topic以及所列的app_id列表
+
+## /review_data：
+1. content_*.json:从Google Play的raw data中筛选的review数据

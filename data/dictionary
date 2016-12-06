@@ -1,0 +1,46 @@
+ACCESS_COARSE_LOCATION
+approximate location,location
+ACCESS_FINE_LOCATION
+precise location,location,latitude,longitude,radius,current location,nearby,accurate,GPS,gps
+CALL_PHONE
+phone call,phone,call
+READ_CONTACTS
+contacts data,read contacts data,phone number,contacts,contact,number
+READ_CALL_LOG
+call log,diale number,phone number
+WRITE_CONTACTS
+contacts data,write contact data
+WRITE_CALL_LOG
+write call log data,call log
+READ_CALENDAR
+calendar data,read calendar data,calendar
+WRITE_CALENDAR
+calendar data,write calendar data
+READ_SMS
+SMS messages,read SMS messages,messages,SMS
+RECEIVE_SMS
+SMS messages,receive SMS messages,messages,SMS
+SEND_SMS
+SMS messages,send SMS messages,send multi-part text,send a text
+RECEIVE_MMS
+MMS messages,monitor MMS messages
+WRITE_EXTERNAL_STORAGE
+write to external storage,downloaded file,enqueue a new download,file scannable,download
+READ_EXTERNAL_STORAGE
+read from external storage
+RECORD_AUDIO
+audio,record audio,listening for speech,listener,speech
+CAMERA
+camera
+READ_PHONE_STATE
+phone state,phone number of the device,cellular network information,status of ongoing calls
+BODY_SENSORS
+data sensor,sensor
+RECEIVE_WAP_PUSH
+WAP push messages,receive WAP push messages,WAP,push messages
+ADD_VOICEMAIL
+voicemails
+USE_SIP
+SIP service
+GET_ACCOUNTS
+account,list account
